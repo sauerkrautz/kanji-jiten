@@ -7,7 +7,7 @@ const KanjiDetail = () => {
   const { kanji } = useParams();
   const [oneKanji, setOneKanji] = useState<IndividualKanjiDetail>();
   const [words, setWords] = useState<string[]>([]);
-  const [localKanji, setLocalKanji] = useState(fetchLocalKanji(kanji));
+  const [localKanji] = useState(fetchLocalKanji(kanji));
 
   useEffect(() => {
     if (localKanji !== undefined && localKanji?.words !== undefined) {
@@ -123,7 +123,7 @@ const KanjiDetail = () => {
             return (
               <div className="w-full flex justify-between gap-2">
                 <div className="lg:p-2 p-1 border-sixth shadow-lg bg-fifth text-black rounded-lg">
-                  {kanji.variants.map((e: any, i: number) => {
+                  {kanji.variants.map((e: any) => {
                     return (
                       <p>
                         <ruby>

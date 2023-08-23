@@ -1,6 +1,5 @@
 import { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaMagnifyingGlass, FaManatSign } from "react-icons/fa6";
 
 const SearchBar = ({ input, setInput }: any) => {
   //   const [input1, setInput1] = useState<string>("");
