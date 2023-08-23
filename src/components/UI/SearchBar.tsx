@@ -1,37 +1,38 @@
-// import { ChangeEvent, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaMagnifyingGlass, FaManatSign } from "react-icons/fa6";
 
-// const SearchBar = ({ input, setInput }: any) => {
-//   const [input1, setInput1] = useState<string>("");
+const SearchBar = ({ input, setInput }: any) => {
+  //   const [input1, setInput1] = useState<string>("");
 
-//   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-//     setInput1(e.target.value);
-//   };
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
 
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-//   return (
-//     <div className="w-full flex items-center justify-center mb-[4rem]">
-//       <form
-//         onSubmit={(e) => {
-//           if (input1.length > 1) {
-//             return;
-//           } else {
-//             navigate(`/kanji/${input1}`);
-//             e.preventDefault();
-//             setInput1("");
-//           }
-//         }}
-//       >
-//         <input
-//           type="text"
-//           className="px-4 py-2 rounded-md bg-second text-white "
-//           onChange={handleInput}
-//           value={input1}
-//         />
-//       </form>
-//     </div>
-//   );
-// };
+  return (
+    <div className="w-full flex items-center justify-center mb-[4rem]">
+      <form
+        onSubmit={(e) => {
+          if (input.length > 1) {
+            return;
+          } else {
+            navigate(`/kanji/${input}`);
+            e.preventDefault();
+            setInput("");
+          }
+        }}
+      >
+        <input
+          type="text"
+          className="px-4 py-2 rounded-md bg-second text-white "
+          onChange={handleInput}
+          value={input}
+        />
+      </form>
+    </div>
+  );
+};
 
-// export default SearchBar;
+export default SearchBar;

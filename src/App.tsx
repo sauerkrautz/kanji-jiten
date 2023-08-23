@@ -3,9 +3,11 @@ import { Outlet } from "react-router-dom";
 import { BsMenuButtonWideFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import SearchBar from "./components/UI/SearchBar";
 
 function App() {
   const [toggled, setToggled] = useState<boolean>(false);
+  const [input, setInput] = useState<string>("");
 
   useEffect(() => {
     console.log(toggled);
