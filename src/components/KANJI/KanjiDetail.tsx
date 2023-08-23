@@ -7,11 +7,12 @@ const KanjiDetail = () => {
   const { kanji } = useParams();
   const [oneKanji, setOneKanji] = useState<IndividualKanjiDetail>();
   const [words, setWords] = useState<string[]>([]);
+  const [localKanji, setLocalKanji] = useState(fetchLocalKanji(kanji));
 
   useEffect(() => {
-    const kanjis = fetchLocalKanji(`${kanji}`);
-    if (kanjis !== null || kanjis !== undefined) {
-      setOneKanji(kanjis);
+    if (localKanji !== undefined && localKanji?.words !== undefined) {
+      setOneKanji(localKanji);
+      setWords(localKanji?.words);
     } else {
       return;
     }
@@ -20,8 +21,8 @@ const KanjiDetail = () => {
   const kanjiQuery = useQuery({
     queryKey: ["kanjis, kanji"],
     queryFn: () => {
-      const localKanji = fetchLocalKanji(kanji);
-      if (localKanji === null || localKanji === undefined) {
+      // const localKanji = fetchLocalKanji(kanji);
+      if (localKanji?.kanji === null || localKanji?.kanji === undefined) {
         console.table({ kanjiDetail: "fetching" });
         return fetchKanji(`/${kanji}`);
       } else {
@@ -30,6 +31,7 @@ const KanjiDetail = () => {
         return;
       }
     },
+    enabled: localKanji?.kanji ? false : true,
     onSuccess(data: any) {
       console.table(data);
       if (data) {
@@ -44,15 +46,17 @@ const KanjiDetail = () => {
   const wordQuery = useQuery({
     queryKey: ["word", "words"],
     queryFn: () => {
-      const localKanjis = fetchLocalKanji(`${kanji}`);
-      if (localKanjis?.words === null || localKanjis?.words === undefined) {
+      // const localKanjis = fetchLocalKanji(`${kanji}`);
+      if (localKanji?.words === null || localKanji?.words === undefined) {
         return fetchWord(`${kanji}`);
       } else {
+        setWords(localKanji.words);
         return;
       }
     },
+    enabled: localKanji?.words ? false : true,
     onSuccess(data) {
-      if ((data && oneKanji !== null) || oneKanji !== undefined) {
+      if (data) {
         localStorage.setItem(
           `${kanji}`,
           JSON.stringify({ ...oneKanji, words: data })
@@ -61,7 +65,7 @@ const KanjiDetail = () => {
       } else {
         return;
       }
-      console.table(data);
+      console.table(data.meanings);
     },
   });
 
@@ -70,7 +74,7 @@ const KanjiDetail = () => {
   if (kanjiQuery.error || wordQuery.error) return <p>error</p>;
 
   return (
-    <div className="w-full min-h-screen flex flex-col lg:flex-row justify-center items-center gap-8 px-20 text-white  ">
+    <div className="w-full min-h-screen flex flex-col  justify-center items-center gap-8 px-20 text-white  ">
       <div className="text-black">
         <p className="lg:text-[12rem] text-[8rem] bg-yellow-500 border-4 border-yellow-600 rounded-lg  ">
           {oneKanji?.kanji}
@@ -104,6 +108,44 @@ const KanjiDetail = () => {
               <p className="lg:p-2 p-1 border-sixth shadow-lg bg-fifth text-black rounded-lg">
                 {e}
               </p>
+            );
+          })}
+        </div>
+        <div className="my-4 text-2xl rounded-lg text-black text-center bg-fifth">
+          words
+        </div>
+        <div className="mt-4 flex flex-wrap lg:gap-4 gap-2 justify-between">
+          <div className="w-full flex justify-between">
+            <p className="text-xl">Written: </p>
+            <p className="text-xl">Meanings: </p>
+          </div>
+          {words.map((kanji: any) => {
+            return (
+              <div className="w-full flex justify-between gap-2">
+                <div className="lg:p-2 p-1 border-sixth shadow-lg bg-fifth text-black rounded-lg">
+                  {kanji.variants.map((e: any, i: number) => {
+                    return (
+                      <p>
+                        <ruby>
+                          {e.written} <rt>{e.pronounced}</rt>
+                        </ruby>
+                        {/* (
+                        {e.meanings.map((e: any) => {
+                          return <p>{e.glosses.map((e: any) => e)}</p>;
+                        })}
+                        ) */}
+                      </p>
+                    );
+                  })}
+                </div>
+                <div>
+                  {kanji.meanings.map((meaning: any) => {
+                    return meaning.glosses.map((mean: string) => {
+                      return <p className="text-white">{mean}</p>;
+                    });
+                  })}
+                </div>
+              </div>
             );
           })}
         </div>

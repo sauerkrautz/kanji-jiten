@@ -8,4 +8,5 @@ interface IndividualKanjiDetail {
   jlpt: number;
   unicode: string;
   heisig_en: string;
+  words?: any;
 }
