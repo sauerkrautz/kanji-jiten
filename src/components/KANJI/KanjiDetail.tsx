@@ -5,7 +5,6 @@ import { fetchKanji, fetchLocalKanji } from "../AXIOS/Api";
 
 const KanjiDetail = () => {
   const { kanji } = useParams();
-
   const [oneKanji, setOneKanji] = useState<IndividualKanjiDetail>();
 
   useEffect(() => {
@@ -54,12 +53,12 @@ const KanjiDetail = () => {
       </div>
       <div className="flex flex-col gap-8">
         <div className="mt-4 flex flex-wrap lg:gap-4 gap-2 justify-between">
-          <p className="text-xl">Meanings: </p>
+          <div className="text-xl">Meanings: </div>
           {oneKanji?.meanings.map((e) => {
             return (
-              <p className="lg:p-2 p-1 border-sixth shadow-lg bg-fifth text-black rounded-lg">
+              <div className="lg:p-2 p-1 border-sixth self-end shadow-lg bg-fifth text-black rounded-lg">
                 {e}
-              </p>
+              </div>
             );
           })}
         </div>

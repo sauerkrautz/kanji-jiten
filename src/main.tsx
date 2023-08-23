@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./index.css";
 import Kanjis from "./components/KANJI/Kanjis.tsx";
-import Kanji from "./components/KANJI/Kanji.tsx";
 import KanjiDetail from "./components/KANJI/KanjiDetail.tsx";
 
 const client = new QueryClient();

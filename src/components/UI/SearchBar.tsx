@@ -1,35 +1,37 @@
-import { ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
+// import { ChangeEvent, useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ input, setInput }: any) => {
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput((prev: any) => (prev = e.target.value));
-  };
+// const SearchBar = ({ input, setInput }: any) => {
+//   const [input1, setInput1] = useState<string>("");
 
-  const navigate = useNavigate();
+//   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+//     setInput1(e.target.value);
+//   };
 
-  return (
-    <div className="w-full flex items-center justify-center mb-[4rem]">
-      <form
-        onSubmit={(e) => {
-          if (input.length > 1) {
-            return;
-          } else {
-            navigate(`/kanji/${input}`);
-            e.preventDefault();
-            setInput("");
-          }
-        }}
-      >
-        <input
-          type="text"
-          className="px-4 py-2 rounded-md bg-second text-white "
-          onChange={handleInput}
-          value={input}
-        />
-      </form>
-    </div>
-  );
-};
+//   const navigate = useNavigate();
 
-export default SearchBar;
+//   return (
+//     <div className="w-full flex items-center justify-center mb-[4rem]">
+//       <form
+//         onSubmit={(e) => {
+//           if (input1.length > 1) {
+//             return;
+//           } else {
+//             navigate(`/kanji/${input1}`);
+//             e.preventDefault();
+//             setInput1("");
+//           }
+//         }}
+//       >
+//         <input
+//           type="text"
+//           className="px-4 py-2 rounded-md bg-second text-white "
+//           onChange={handleInput}
+//           value={input1}
+//         />
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default SearchBar;

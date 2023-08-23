@@ -1,6 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Kanjis from "./components/KANJI/Kanjis";
-import SearchBar from "./components/UI/SearchBar";
 
 function App() {
   return (

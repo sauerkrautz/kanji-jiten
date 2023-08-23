@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { fetchLocalKanji } from "../AXIOS/Api";
+import { Link } from "react-router-dom";
 
 const Kanji = ({ kanji }: any) => {
   //   const [details, setDetails] = useState<IndividualKanjiDetail>();
