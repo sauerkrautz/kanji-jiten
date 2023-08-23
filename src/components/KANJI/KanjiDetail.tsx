@@ -74,13 +74,13 @@ const KanjiDetail = () => {
   if (kanjiQuery.error || wordQuery.error) return <p>error</p>;
 
   return (
-    <div className="w-full min-h-screen flex flex-col  justify-center items-center gap-8 px-20 text-white  ">
+    <div className="min-w-full min-h-screen flex flex-col  justify-center items-center gap-8 px-8 md:px-12 lg:px-20 text-white  ">
       <div className="text-black">
-        <p className="lg:text-[12rem] text-[8rem] bg-yellow-500 border-4 border-yellow-600 rounded-lg  ">
+        <p className="lg:text-[12rem] text-[8rem] mt-16 bg-yellow-500 border-4 border-yellow-600 rounded-lg  ">
           {oneKanji?.kanji}
         </p>
       </div>
-      <div className="flex flex-col gap-8">
+      <div className="flex w-full flex-col gap-8">
         <div className="mt-4 flex flex-wrap lg:gap-4 gap-2 justify-between">
           <div className="text-xl">Meanings: </div>
           {oneKanji?.meanings.map((e) => {
