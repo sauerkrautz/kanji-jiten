@@ -6,6 +6,7 @@ import SearchBar from "../UI/SearchBar";
 
 const Kanjis = () => {
   const [kanjis, setKanjis] = useState<string[] | null>(null);
+  const [input, setInput] = useState<string>();
 
   useEffect(() => {
     const kanjis = fetchLocalKanji();
@@ -46,7 +47,7 @@ const Kanjis = () => {
 
   return (
     <>
-      <SearchBar />
+      <SearchBar input={input} setInput={setInput} />
       <div className="grid grid-cols-4 lg:grid-cols-6 gap-8 w-full px-8">
         {kanjis?.map((kanji: string) => {
           return <Kanji kanji={kanji} key={kanji} />;

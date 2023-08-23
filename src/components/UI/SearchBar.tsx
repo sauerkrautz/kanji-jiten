@@ -1,18 +1,24 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
-const SearchBar = () => {
-  const [input, setInput] = useState<string>();
-
+const SearchBar = ({ input, setInput }: any) => {
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput((prev) => (prev = e.target.value));
+    setInput((prev: any) => (prev = e.target.value));
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="w-full flex items-center justify-center mb-[4rem]">
       <form
         onSubmit={(e) => {
-          e.preventDefault();
-          setInput("");
+          if (input.length > 1) {
+            return;
+          } else {
+            navigate(`/kanji/${input}`);
+            e.preventDefault();
+            setInput("");
+          }
         }}
       >
         <input
