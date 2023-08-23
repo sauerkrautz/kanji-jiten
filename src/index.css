@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "MotoyaExMaru";
+  src: url("/fonts/MotoyaExMaru W55 W4 mono.ttf");
+}

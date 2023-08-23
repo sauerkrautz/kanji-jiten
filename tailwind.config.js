@@ -15,6 +15,9 @@ export default {
         fifth: "#F5D7DB",
         sixth: "#F1916D",
       },
+      fontFamily: {
+        motoya: ["MotoyaExMaru", "Times New Roman"],
+      },
     },
   },
   plugins: [],

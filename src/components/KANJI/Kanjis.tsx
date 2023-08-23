@@ -1,13 +1,14 @@
 import { UseQueryResult, useQuery } from "react-query";
 import { fetchKanji, fetchLocalKanji } from "../AXIOS/Api";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Kanji from "./Kanji";
 
 const Kanjis = () => {
   const [kanjis, setKanjis] = useState<string[] | null>(null);
   const [input, setInput] = useState("");
 
+  const { path } = useParams();
   const navigate = useNavigate();
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -15,31 +16,32 @@ const Kanjis = () => {
   };
 
   useEffect(() => {
-    const kanjis = fetchLocalKanji();
+    console.log(path);
+    const kanjis = fetchLocalKanji(`${path}`);
     if (kanjis != null || kanjis != undefined) {
       setKanjis(kanjis);
     } else {
       return;
     }
-  }, []);
+  }, [path]);
 
   const { isLoading, error }: UseQueryResult<any> = useQuery({
     queryKey: ["kanjis", "kanji"],
     queryFn: () => {
-      const kanji = fetchLocalKanji();
+      const kanji = fetchLocalKanji(`${path}`);
       if (kanji === null || kanji === undefined) {
         console.table({ status: "kanjis being fetched" });
-        return fetchKanji("joyo");
+        return fetchKanji(`${path}`);
       } else {
         console.table({ status: "kanjis not being fetched" });
         setKanjis(kanji);
         return;
       }
     },
-    enabled: fetchLocalKanji() ? false : true,
+    enabled: fetchLocalKanji(`${path}`) ? false : true,
     onSuccess(data: any) {
       if (data) {
-        localStorage.setItem("joyo", JSON.stringify(data));
+        localStorage.setItem(`${path}`, JSON.stringify(data));
         setKanjis(data);
       } else {
         return;
@@ -56,6 +58,7 @@ const Kanjis = () => {
       <div className="w-full flex items-center justify-center mb-[4rem]">
         <form
           onSubmit={(e) => {
+            e.preventDefault();
             if (input.length > 1) {
               return;
             } else {

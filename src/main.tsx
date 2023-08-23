@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "joyo", element: <Kanjis />, errorElement: <ErrorPage /> },
+      { path: "/:path", element: <Kanjis />, errorElement: <ErrorPage /> },
       {
         path: "kanji/:kanji",
         element: <KanjiDetail />,
