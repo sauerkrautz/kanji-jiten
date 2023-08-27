@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import "./index.css";
 import Kanjis from "./components/KANJI/Kanjis.tsx";
 import KanjiDetail from "./components/KANJI/KanjiDetail.tsx";
+import OpenedKanjis from "./components/KANJI/OpenedKanjis.jsx";
 
 const client = new QueryClient();
 
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      { path: "/", element: <OpenedKanjis />, errorElement: <ErrorPage /> },
       { path: "/:path", element: <Kanjis />, errorElement: <ErrorPage /> },
       {
         path: "kanji/:kanji",

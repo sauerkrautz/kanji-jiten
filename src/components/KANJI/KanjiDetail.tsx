@@ -28,6 +28,19 @@ const KanjiDetail = () => {
       } else {
         console.table({ kanjiDetail: "not fetching" });
         setOneKanji(localKanji);
+
+        const openedLocalKanji = JSON.parse(
+          localStorage.getItem("opened") as any
+        );
+
+        if (openedLocalKanji) {
+          localStorage.setItem(
+            "opened",
+            JSON.stringify({ opened: [...openedLocalKanji.opened, kanji] })
+          );
+        } else {
+          localStorage.setItem("opened", JSON.stringify({ opened: [kanji] }));
+        }
         return;
       }
     },
@@ -35,8 +48,20 @@ const KanjiDetail = () => {
     onSuccess(data: any) {
       console.table(data);
       if (data) {
-        localStorage.setItem(`${kanji}`, JSON.stringify(data));
         setOneKanji(data);
+        localStorage.setItem(`${kanji}`, JSON.stringify(data));
+        const openedLocalKanji = JSON.parse(
+          localStorage.getItem("opened") as any
+        );
+
+        if (openedLocalKanji) {
+          localStorage.setItem(
+            "opened",
+            JSON.stringify({ opened: [...openedLocalKanji.opened, kanji] })
+          );
+        } else {
+          localStorage.setItem("opened", JSON.stringify({ opened: [kanji] }));
+        }
       } else {
         return;
       }
@@ -122,7 +147,7 @@ const KanjiDetail = () => {
           {words.map((kanji: any) => {
             return (
               <div className="w-full flex justify-between gap-2">
-                <div className="lg:p-2 p-1 border-sixth shadow-lg bg-fifth text-black rounded-lg">
+                <div className="lg:p-2 p-1 lg:text-2xl md:text-xl border-sixth shadow-lg bg-fifth text-black rounded-lg">
                   {kanji.variants.map((e: any) => {
                     return (
                       <p>
