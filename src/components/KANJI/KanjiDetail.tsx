@@ -36,10 +36,10 @@ const KanjiDetail = () => {
         if (openedLocalKanji) {
           localStorage.setItem(
             "opened",
-            JSON.stringify({ opened: [...openedLocalKanji.opened, kanji] })
+            JSON.stringify({ opened: [...openedLocalKanji.opened, localKanji], detail: [...openedLocalKanji.detail , oneKanji] })
           );
         } else {
-          localStorage.setItem("opened", JSON.stringify({ opened: [kanji] }));
+          localStorage.setItem("opened", JSON.stringify({ opened: [kanji], detail: [...openedLocalKanji.detail , oneKanji] }));
         }
         return;
       }
@@ -84,7 +84,10 @@ const KanjiDetail = () => {
       if (data) {
         localStorage.setItem(
           `${kanji}`,
-          JSON.stringify({ ...oneKanji, words: data })
+          JSON.stringify({
+            ...(fetchLocalKanji(`${kanji}`) as any),
+            words: data,
+          })
         );
         setWords(data);
       } else {

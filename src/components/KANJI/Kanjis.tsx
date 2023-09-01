@@ -58,7 +58,7 @@ const Kanjis = () => {
     <>
       <div className="w-full flex items-center justify-center mb-[4rem] mt-20 ">
         <form
-          className="w-1/2 flex text-white items-center gap-2"
+          className="w-1/2 flex  text-white items-center gap-2"
           onSubmit={(e) => {
             e.preventDefault();
             if (input.length > 1) {

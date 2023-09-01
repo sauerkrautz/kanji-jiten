@@ -16,7 +16,7 @@ function App() {
       <motion.div
         initial={{ x: "100%" }}
         animate={{ x: toggled ? 0 : "100%" }}
-        className="fixed w-full min-h-screen z-10 px-20 bg-opacity-20 flex justify-center items-center bg-fifth"
+        className="fixed w-full min-h-screen z-50 px-20 bg-opacity-20 flex justify-center items-center bg-fifth"
         onClick={() => {
           setToggled(!toggled);
         }}
@@ -72,19 +72,23 @@ function App() {
         </div>
       </motion.div>
       <div className="relative container flex flex-col justify-center items-center min-w-full min-h-screen py-8 bg-first font-motoya ">
-        <div className="fixed top-[2rem] w-full py-4 mb-8 -mt-8  bg-third flex justify-between px-6 text-white">
+        <div className="fixed z-10 top-[2rem] w-full py-4 mb-8 -mt-8  bg-third flex justify-between px-6 text-white">
           <div className="static left-4 top-4  text-4xl hover:pointer-events-auto ">
             <button
               onClick={() => {
-                setToggled(!toggled);
+                setToggled(!toggled); 
               }}
             >
-              <BsMenuButtonWideFill />
+              <i className="z-10">
+                <BsMenuButtonWideFill />
+              </i>
             </button>
           </div>
+          <Link to="/">
           <div className="text-3xl">
             <p>漢字辞典</p>
           </div>
+         </Link>
           <div className="text-xl ">リズキ</div>
         </div>
         <Outlet />
