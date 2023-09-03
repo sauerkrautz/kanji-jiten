@@ -16,7 +16,7 @@ const Quiz = () => {
         {openedKanjis.map((e: string, i: number) => {
           return (
             <SwiperSlide className="w-full h-full flex flex-col justify-center items-center text-white text-2xl">
-              <h1>hello world</h1>
+              <h1>hello world{e } {i}{getRandomNumber(10)}</h1>
             </SwiperSlide>
           );
         })}
