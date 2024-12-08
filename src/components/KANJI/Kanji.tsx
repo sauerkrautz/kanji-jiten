@@ -15,7 +15,7 @@ const Kanji = ({ kanji }: any) => {
   return (
     <>
       <Link to={`/kanji/${kanji}`}>
-        <div className="text-4xl flex justify-evenly items-center text-white rounded-lg shadow-lg bg-second p-8 text-center ">
+        <div className="text-4xl flex justify-evenly items-center text-white rounded-lg shadow-lg bg-second p-4 md:p-8 text-center ">
           <p>{kanji}</p>
           {/* <div>
             {details?.meanings.map((e) => {
